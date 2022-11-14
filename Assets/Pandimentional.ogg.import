@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Pandimentional.ogg-55991aee949ba7548c2c1d708603a026.oggstr"
+
+[deps]
+
+source_file="res://Assets/Pandimentional.ogg"
+dest_files=[ "res://.import/Pandimentional.ogg-55991aee949ba7548c2c1d708603a026.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

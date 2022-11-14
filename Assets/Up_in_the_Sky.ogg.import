@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Up_in_the_Sky.ogg-ad09b7a898d2bfd3337ce3d0ffb0f4ed.oggstr"
+
+[deps]
+
+source_file="res://Assets/Up_in_the_Sky.ogg"
+dest_files=[ "res://.import/Up_in_the_Sky.ogg-ad09b7a898d2bfd3337ce3d0ffb0f4ed.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

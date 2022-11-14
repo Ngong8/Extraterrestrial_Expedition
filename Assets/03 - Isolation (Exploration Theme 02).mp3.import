@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/03 - Isolation (Exploration Theme 02).mp3-ff471d8f8aa2ab921b2a438df9c49ed5.mp3str"
+
+[deps]
+
+source_file="res://Assets/03 - Isolation (Exploration Theme 02).mp3"
+dest_files=[ "res://.import/03 - Isolation (Exploration Theme 02).mp3-ff471d8f8aa2ab921b2a438df9c49ed5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
