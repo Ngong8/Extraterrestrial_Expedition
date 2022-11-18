@@ -8,6 +8,7 @@ resource_local_to_scene = true
 radius = 100.0
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 5 )
 
 [node name="DropLoot" type="KinematicBody2D"]
 collision_layer = 8

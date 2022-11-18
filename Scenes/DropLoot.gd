@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var graphic = get_node("%Graphic")
+var item_name : String = ""
 var target : Node = null
 var move_speed : int = 500;	var acceleration : int = 1000
 var gravity : int = 2000
@@ -16,7 +17,9 @@ func _physics_process(delta: float) -> void:
 		direction = (target.global_position - global_position).normalized()
 		velocity = velocity.move_toward(direction * move_speed, acceleration)
 		if global_position.distance_to(target.global_position) <= 10:
-			target.get_node("%Menus")._add_item_count()
+#			print_debug(item_name)
+			PlayerInventory._add_item(item_name, 1)
+			target.get_node("%Inventory")._initialize_inventory()
 			queue_free()
 	else:
 		collision_mask = 1

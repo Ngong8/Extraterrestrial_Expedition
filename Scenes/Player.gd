@@ -9,7 +9,7 @@ var direction : Vector2; var velocity: Vector2
 onready var camera = get_node("Camera2D")
 var des_zoom : Vector2
 var zoom_spd : Vector2 = Vector2(0.5,0.5); var current_zoom_spd : Vector2 = zoom_spd
-const MIN_ZOOM_LVL : Vector2 = Vector2(1.5,1.5)
+const MIN_ZOOM_LVL : Vector2 = Vector2(1.0,1.0)
 const MAX_ZOOM_LVL : Vector2 = Vector2(5.0,5.0)
 func _ready() -> void:
 	des_zoom = camera.zoom

@@ -1,37 +1,30 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scenes/Tool_Weapon.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Assets/tool_indicator.png" type="Texture" id=4]
 [ext_resource path="res://Assets/lightbeam.png" type="Texture" id=5]
-[ext_resource path="res://Assets/items_protoset.tres" type="Resource" id=6]
+[ext_resource path="res://Assets/ItemSlot.stylebox" type="StyleBox" id=6]
 [ext_resource path="res://Scenes/Menus.gd" type="Script" id=7]
-[ext_resource path="res://Assets/extraterrestial_items.png" type="Texture" id=8]
-[ext_resource path="res://addons/gloot/inventory.gd" type="Script" id=9]
-[ext_resource path="res://addons/gloot/inventory_grid.gd" type="Script" id=10]
-[ext_resource path="res://addons/gloot/inventory_stacked.gd" type="Script" id=11]
-[ext_resource path="res://addons/gloot/inventory_item.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Hotbar.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Slot.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Inventory.gd" type="Script" id=10]
+[ext_resource path="res://Assets/fonts/PixelFJVerdana12pt.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://Assets/items/equip_suit_slot.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/Crafting.gd" type="Script" id=13]
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="DynamicFont" id=24]
 resource_local_to_scene = true
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=25]
-resource_local_to_scene = true
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=26]
-resource_local_to_scene = true
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 32, 32 )
+size = 8
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 resource_local_to_scene = true
 radius = 12.0
-height = 40.0
+height = 32.0
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 5 )
@@ -125,7 +118,6 @@ animations = [ {
 resource_local_to_scene = true
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 0, -500 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 2 )
@@ -146,76 +138,349 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
 
-[node name="ItemList" type="Control" parent="Camera2D/Menus/GUIs"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -160.0
-margin_bottom = 320.0
-rect_min_size = Vector2( 160, 320 )
-mouse_filter = 1
-
-[node name="GridContainer" type="GridContainer" parent="Camera2D/Menus/GUIs/ItemList"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -180.0
-margin_bottom = 320.0
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
-columns = 3
-
-[node name="DirtBtn" type="Button" parent="Camera2D/Menus/GUIs/ItemList/GridContainer"]
+[node name="Inventory" type="Control" parent="Camera2D/Menus/GUIs"]
 unique_name_in_owner = true
-margin_right = 60.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 60, 30 )
-text = "0"
-icon = SubResource( 24 )
-flat = true
-expand_icon = true
+margin_top = 100.0
+margin_right = 480.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 160, 160 )
+script = ExtResource( 10 )
 
-[node name="StoneBtn" type="Button" parent="Camera2D/Menus/GUIs/ItemList/GridContainer"]
-unique_name_in_owner = true
-margin_left = 60.0
-margin_right = 120.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 60, 30 )
-text = "0"
-icon = SubResource( 25 )
-flat = true
-expand_icon = true
-
-[node name="MilkoreBtn" type="Button" parent="Camera2D/Menus/GUIs/ItemList/GridContainer"]
-unique_name_in_owner = true
-margin_left = 120.0
+[node name="InventoryGrids" type="GridContainer" parent="Camera2D/Menus/GUIs/Inventory"]
 margin_right = 180.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 60, 30 )
-text = "0"
-icon = SubResource( 26 )
-flat = true
-expand_icon = true
+margin_bottom = 320.0
+rect_min_size = Vector2( 480, 0 )
+mouse_filter = 0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 6
+columns = 8
 
-[node name="Inventory" type="Node" parent="Camera2D/Menus/GUIs"]
-script = ExtResource( 9 )
-item_protoset = ExtResource( 6 )
-
-[node name="InventoryStacked" type="Node" parent="Camera2D/Menus/GUIs/Inventory"]
-script = ExtResource( 11 )
-item_protoset = ExtResource( 6 )
-capacity = 999.0
-
-[node name="dirt" type="Node" parent="Camera2D/Menus/GUIs/Inventory/InventoryStacked"]
-script = ExtResource( 12 )
-protoset = ExtResource( 6 )
-prototype_id = "dirt"
-
-[node name="Items" type="Control" parent="Camera2D/Menus/GUIs"]
+[node name="Slot1" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
 margin_right = 40.0
 margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
 
-[node name="InventoryGrid" type="Node" parent="Camera2D/Menus/GUIs/Items"]
-script = ExtResource( 10 )
-item_protoset = ExtResource( 6 )
+[node name="Slot2" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 46.0
+margin_right = 86.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot3" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 92.0
+margin_right = 132.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot4" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 138.0
+margin_right = 178.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot5" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 184.0
+margin_right = 224.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot6" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 230.0
+margin_right = 270.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot7" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 276.0
+margin_right = 316.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot8" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 322.0
+margin_right = 362.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot9" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_top = 46.0
+margin_right = 40.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot10" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 46.0
+margin_top = 46.0
+margin_right = 86.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot11" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 92.0
+margin_top = 46.0
+margin_right = 132.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot12" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 138.0
+margin_top = 46.0
+margin_right = 178.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot13" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 184.0
+margin_top = 46.0
+margin_right = 224.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot14" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 230.0
+margin_top = 46.0
+margin_right = 270.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot15" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 276.0
+margin_top = 46.0
+margin_right = 316.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot16" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 322.0
+margin_top = 46.0
+margin_right = 362.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot17" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_top = 92.0
+margin_right = 40.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot18" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 46.0
+margin_top = 92.0
+margin_right = 86.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot19" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 92.0
+margin_top = 92.0
+margin_right = 132.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot20" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 138.0
+margin_top = 92.0
+margin_right = 178.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot21" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 184.0
+margin_top = 92.0
+margin_right = 224.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot22" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 230.0
+margin_top = 92.0
+margin_right = 270.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot23" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 276.0
+margin_top = 92.0
+margin_right = 316.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Slot24" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/InventoryGrids"]
+margin_left = 322.0
+margin_top = 92.0
+margin_right = 362.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="EquipmentGrids" type="GridContainer" parent="Camera2D/Menus/GUIs/Inventory"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+
+[node name="SuitSlot" type="Panel" parent="Camera2D/Menus/GUIs/Inventory/EquipmentGrids"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="Icon" type="TextureRect" parent="Camera2D/Menus/GUIs/Inventory/EquipmentGrids/SuitSlot"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 35.0
+texture = ExtResource( 12 )
+expand = true
+
+[node name="Hotbar" type="Control" parent="Camera2D/Menus/GUIs"]
+unique_name_in_owner = true
+margin_right = 400.0
+margin_bottom = 80.0
+script = ExtResource( 8 )
+
+[node name="HotbarGrids" type="GridContainer" parent="Camera2D/Menus/GUIs/Hotbar"]
+margin_top = 40.0
+margin_right = 362.0
+margin_bottom = 80.0
+custom_constants/vseparation = 0
+custom_constants/hseparation = 6
+columns = 8
+
+[node name="HotbarSlot1" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="HotbarSlot2" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_left = 46.0
+margin_right = 86.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="HotbarSlot3" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_left = 92.0
+margin_right = 132.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="HotbarSlot4" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_left = 138.0
+margin_right = 178.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="HotbarSlot5" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_left = 184.0
+margin_right = 224.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="HotbarSlot6" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_left = 230.0
+margin_right = 270.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="HotbarSlot7" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_left = 276.0
+margin_right = 316.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="HotbarSlot8" type="Panel" parent="Camera2D/Menus/GUIs/Hotbar/HotbarGrids"]
+margin_left = 322.0
+margin_right = 362.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="ActiveItemLbl" type="Label" parent="Camera2D/Menus/GUIs/Hotbar"]
+margin_right = 360.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 24 )
+text = "Item : "
+align = 1
+valign = 1
+
+[node name="Crafting" type="Control" parent="Camera2D/Menus/GUIs"]
+unique_name_in_owner = true
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -50.0
+margin_right = 100.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 100 )
+script = ExtResource( 13 )
+
+[node name="CraftGrids" type="GridContainer" parent="Camera2D/Menus/GUIs/Crafting"]
+margin_right = 40.0
+margin_bottom = 40.0
+columns = 6
 
 [node name="Graphic" type="Sprite" parent="."]
 texture = ExtResource( 3 )
@@ -232,8 +497,7 @@ swing_time = 0.15
 
 [node name="ToolGraphic" type="Sprite" parent="Tool_Weapon"]
 unique_name_in_owner = true
-modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 1, 0.2 )
+self_modulate = Color( 0.992157, 1, 0, 0.752941 )
 texture = ExtResource( 3 )
 
 [node name="AtkCast" type="RayCast2D" parent="Tool_Weapon"]
@@ -255,7 +519,7 @@ end_cap_mode = 2
 self_modulate = Color( 0, 0.952941, 1, 1 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 23 )
-frame = 9
+frame = 7
 playing = true
 
 [node name="AtkArea" type="Area2D" parent="Tool_Weapon"]
@@ -269,6 +533,7 @@ collision_mask = 5
 shape = SubResource( 2 )
 
 [node name="Indicator" type="Sprite" parent="Tool_Weapon/AtkArea"]
+unique_name_in_owner = true
 show_behind_parent = true
 light_mask = 0
 scale = Vector2( 0.4, 0.4 )

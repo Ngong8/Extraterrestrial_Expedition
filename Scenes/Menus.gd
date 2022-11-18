@@ -1,21 +1,19 @@
 extends CanvasLayer
 
-onready var dirt_btn = get_node("%DirtBtn")
-onready var stone_btn = get_node("%StoneBtn")
-onready var milkore_btn = get_node("%MilkoreBtn")
+var holding_item : ITEM = null
+onready var inventory_node = get_node("%Inventory")
 var dirt_item : int = 0;	var stone_item : int = 0;	var milkore_item : int = 0
 func _ready() -> void:
-	stone_btn.icon.set("region", Rect2(32,0, 32,32))
-	milkore_btn.icon.set("region", Rect2(64,0, 32,32))
-	
-	dirt_btn.text = str(dirt_item)
-	stone_btn.text = str(stone_item)
-	milkore_btn.text = str(milkore_item)
 	return
 
-func _add_item_count(item_name : String = "") -> void:
-	if item_name == "" or item_name == "dirt":
-		dirt_item += 1
-		dirt_btn.text = str(dirt_item)
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("game_menu"):
+		inventory_node.visible = !inventory_node.visible
+		inventory_node._initialize_inventory()
+		
+	if event.is_action_pressed("scroll_up"):
+		PlayerInventory._active_item_scroll_up()
+	elif event.is_action_pressed("scroll_down"):
+		PlayerInventory._active_item_scroll_down()
 	return
 

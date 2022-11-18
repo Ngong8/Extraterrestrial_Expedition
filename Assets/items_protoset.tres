@@ -11,10 +11,20 @@ json_data = "[
         \"stack_size\": 50,
         \"width\": 1,
         \"height\": 1,
-		\"image\": \"res://Assets/atlas/extraterrestial_items.atlastex\"
+		\"image\": \"res://Assets/items/dirt_item.png\"
     },
 	{
 		\"id\": \"stone\",
-		\"image\": \"res://Assets/atlas/extraterrestial_items.atlastex\"
+		\"stack_size\": 50,
+        \"width\": 1,
+        \"height\": 1,
+		\"image\": \"res://Assets/items/stone_item.png\"
+	},
+	{
+		\"id\": \"milkore\",
+		\"stack_size\": 50,
+        \"width\": 1,
+        \"height\": 1,
+		\"image\": \"res://Assets/items/milkore_item.png\"
 	}
 ]"

@@ -1,0 +1,81 @@
+{
+	"Dirt": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "This dirt block looks and functions similar or identical\nto the ones on Earth. Can be placed adjacent to a block."
+	},
+	"Stone": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "This stone block looks and functions similar or identical\nto the ones on Earth. Can be placed adjacent to a block."
+	},
+	"Milkore": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "An ore that its colouring looks like milk, but it can be\nuseful to craft something durable despite its looking."
+	},
+	"Shinyore": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "This ore is shiny! It probably contains some sort of chemicals\n for chemical reaction to make itself illuminate instead of shine through visible light.\nIt can be used to craft components which later on for crafting more advanced utilities."
+	},
+	"Magmaore": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "It emits dim red light and it feels warm when touched it.\nIt doesn't burns despite it looks like a very hot stuff like lava on Earth!"
+	},
+	"Mining Laser": {
+		"ItemCategory": "Tool",
+		"StackSize": 1,
+		"ItemAttackDMG": 5,
+		"ItemAttackSpeed": 0.15,
+		"ItemAttackRange": 150,
+		"Description": "A laser that is designed to mine dirts, stones and ores,\nslow mining power, but it gets the job done."
+	},
+	"Mining Laser - MK1": {
+		"ItemCategory": "Tool",
+		"StackSize": 1,
+		"ItemAttackDMG": 10,
+		"ItemAttackSpeed": 0.12,
+		"ItemAttackRange": 200,
+		"Description": "This is an improved version of the mining laser tool.\nThe speed of this tool is slightly faster than the basic one."
+	},
+	"Mining Laser - MK2": {
+		"ItemCategory": "Tool",
+		"StackSize": 1,
+		"ItemAttackDMG": 25,
+		"ItemAttackSpeed": 0.10,
+		"ItemAttackRange": 250,
+		"Description": "The MK2 edition of the mining laser can emit more laser points to mine multiple blocks at the same time.\nThey will be constantly spreading around the area where the user point at."
+	},
+	"Explorer Suit": {
+		"ItemCategory": "Suit",
+		"StackSize": 1,
+		"ItemDefense": 50,
+		"ItemShield": 1000,
+		"ItemShieldRechargeDelay": 2.5,
+		"ItemShieldRechargeRate": 10,
+		"ItemDurability": 500,
+		"Description": "This is a basic spacesuit mainly for exploring the area which lacks of oxygen,\nit stops the incoming damage poorly, but it has a shield to protect the user before it depletes."
+	},
+	"EE-suit": {
+		"ItemCategory": "Suit",
+		"StackSize": 1,
+		"ItemDefense": 20,
+		"ItemShield": 2500,
+		"ItemShieldRechargeDelay": 2.25,
+		"ItemShieldRechargeRate": 20,
+		"ItemDurability": 800,
+		"Description": "The abbreviation of Environmental-Experimentation suit. This suit is designed to withstand\nalmost every kind of pollutions including the chemical pollution, has an extended shield capacity and faster shield recharge rate.\nIt is a bit heavier and has lower damage resistance than the explorer suit."
+	},
+	"Guardian Suit": {
+		"ItemCategory": "Suit",
+		"StackSize": 1,
+		"ItemDefense": 100,
+		"ItemShield": 200,
+		"ItemShieldRechargeDelay": 3.5,
+		"ItemShieldRechargeRate": 5,
+		"ItemDurability": 10000,
+		"Description": "This suit has the highest protection rating in the world, at least, the world of this very game.\nBasically nobody gets to make or access this suit except the scientists in the secret lab at somewhere.\n\nThis hasn't been tested on field so use at your own risk."
+	},
+}

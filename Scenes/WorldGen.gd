@@ -16,11 +16,15 @@ func _ready():
 
 	#Set the seed as random numbers
 	noise.seed = randi()
-	noise.octaves = 6
+	noise.octaves = 8
 	noise.persistence = 0.6
 	noise.lacunarity = 1.0
+	noise.period = 512 #The farther away from zero the smoother the terrain is going to look
 	cave_noise.seed = randi()
-	noise.period = 256 #The farther away from zero the smoother the terrain is going to look
+	cave_noise.octaves = 5
+	cave_noise.persistence = 0.6
+	cave_noise.lacunarity = 1.8
+	cave_noise.period = 100 #The farther away from zero the smoother the terrain is going to look
 	
 	for x in range(-x_length,x_length): #Loop through the X length starting from negative to positive
 		var y = ceil(noise.get_noise_1d(x) * height) #Get the noise at the given length and multiply it by the height then round it
@@ -53,9 +57,9 @@ func _ready():
 		for depth in range(y_depth-40,y_depth):
 			set_cellv(Vector2(x,depth),cell_names.milkore)
 
-		for depth in range(y,y_depth): #Start from the Y and go down to the Y depth
+		for depth in range(y+5,y_depth): #Start from the Y and go down to the Y depth
 			var yy = cave_noise.get_noise_2d(x,depth) #Get 2d noise from the given X and Y value
 
-			if abs(yy) < .03: #Check if the absolute value of the noise is less than .03
+			if abs(yy) < .05: #Check if the absolute value of the noise is less than .03
 				set_cellv(Vector2(x,depth + y),-1) #Remove the block at the given X and Y value
 

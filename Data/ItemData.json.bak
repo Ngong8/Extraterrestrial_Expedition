@@ -1,0 +1,41 @@
+{
+	"Dirt": {
+		"ItemCategory": "Resource",
+		"StackSize": 99,
+		"Description": "A dirt."
+	},
+	"Stone": {
+		"ItemCategory": "Resource",
+		"StackSize": 99,
+		"Description": "A stone."
+	},
+	"Milkore": {
+		"ItemCategory": "Resource",
+		"StackSize": 99,
+		"Description": "An ore that its colouring looks like milk, but it can be useful to craft something durable despite its looking."
+	},
+	"Mining Laser": {
+		"ItemCategory": "Tool",
+		"StackSize": 1,
+		"ItemAttackDMG": 5,
+		"ItemAttackSpeed": 0.15,
+		"Description": "A laser that is designed to mine dirts, stones and ores, slow mining power, but it gets the job done."
+	},
+	"Mining Laser - MK1": {
+		"ItemCategory": "Tool",
+		"StackSize": 1,
+		"ItemAttackDMG": 10,
+		"ItemAttackSpeed": 0.12,
+		"Description": "This is an improved version of the mining laser tool. The speed of this tool is slightly better than the basic one."
+	},
+	"Basic Spacesuit": {
+		"ItemCategory": "Armor",
+		"StackSize": 1,
+		"ItemDefense": 25,
+		"ItemShield": 500,
+		"ItemShieldRechargeDelay": 2.5,
+		"ItemShieldRechargeRate": 5,
+		"ItemDurability": 1000,
+		"Description": "This is a basic spacesuit for adapting most of the environments in any place, it stops the incoming damage poorly, but it has a shield to protect the user before it depletes."
+	},
+}
