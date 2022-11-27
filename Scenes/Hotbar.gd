@@ -53,7 +53,7 @@ func _slot_gui_input(event: InputEvent, slot: SLOT_CLASS):
 				_left_click_not_holding(slot)
 			_update_active_item_label()
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	var menus = find_parent("Menus")
 	if menus.holding_item:
 		menus.holding_item.global_position = get_global_mouse_position()
@@ -104,6 +104,7 @@ func _use_item(slot : SLOT_CLASS, amount_to_use : int = 1) -> void:
 		PlayerInventory._reduce_item_quantity(slot, amount_to_use)
 		slot.item._decrease_item_quantity(amount_to_use)
 	else:
+		PlayerInventory._remove_item(slot)
 		slot.item.queue_free()
 		slot.item = null
 		_update_active_item_label()

@@ -4,11 +4,11 @@ var current_speed_mult = 1
 var speed_mult = 2;	var normal_speed_mult = 1
 var speed_x = 20
 var speed_y = 20
-
+var a
 func _physics_process(_delta):
 	if current:
 		if Input.is_key_pressed(KEY_R):
-			get_tree().reload_current_scene()
+			a = get_tree().reload_current_scene()
 		if Input.is_key_pressed(KEY_SHIFT):
 			current_speed_mult = speed_mult
 		else:	current_speed_mult = normal_speed_mult

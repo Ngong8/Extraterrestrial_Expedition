@@ -1,12 +1,14 @@
 extends KinematicBody2D
 
 onready var graphic = get_node("%Graphic")
-var item_name : String = ""
+var item_name : String = "";	var item_icon_name : String = ""
 var target : Node = null
 var move_speed : int = 500;	var acceleration : int = 1000
 var gravity : int = 2000
 var direction : Vector2; var velocity: Vector2
 func _ready() -> void:
+	item_icon_name = item_name.to_lower()
+	graphic.texture = load("res://Assets/items/" + item_icon_name + "_item.png")
 #	print_debug(graphic.texture.get("region"))
 	return
 

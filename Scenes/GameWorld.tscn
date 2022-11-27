@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/terrain0.tres" type="TileSet" id=2]
@@ -15,48 +15,55 @@
 [ext_resource path="res://Assets/background_plains-Sheet5.png" type="Texture" id=13]
 [ext_resource path="res://Assets/background_plains-Sheet3.png" type="Texture" id=14]
 [ext_resource path="res://Assets/background_plains-Sheet2.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/EscapePod.tscn" type="PackedScene" id=16]
+[ext_resource path="res://addons/nklbdev.parallax/Parallax.gd" type="Script" id=17]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Crashlanding"
+length = 5.0
+step = 0.01
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="Parallax" type="Node2D" parent="."]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 151.478, 186.418 )
+script = ExtResource( 17 )
+enabled_in_editor = true
+motion_scale = Vector2( 1, 1 )
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0, 0 )
-motion_mirroring = Vector2( 320, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite" type="Sprite" parent="Parallax"]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 11 )
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.01, 0 )
-motion_mirroring = Vector2( 320, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+[node name="Sprite2" type="Sprite" parent="Parallax"]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 15 )
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.01, 0 )
-motion_mirroring = Vector2( 320, 0 )
+[node name="Parallax2" type="Node2D" parent="."]
+modulate = Color( 0.780392, 0.780392, 0.780392, 1 )
+position = Vector2( 151.478, 186.418 )
+script = ExtResource( 17 )
+enabled_in_editor = true
+motion_scale = Vector2( 1, 1 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+[node name="Sprite3" type="Sprite" parent="Parallax2"]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 14 )
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.02, 0 )
-motion_mirroring = Vector2( 320, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+[node name="Sprite4" type="Sprite" parent="Parallax2"]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 12 )
 
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.03, 0 )
-motion_mirroring = Vector2( 320, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+[node name="Sprite5" type="Sprite" parent="Parallax2"]
+scale = Vector2( 5, 5 )
 texture = ExtResource( 13 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="EscapePod" parent="." instance=ExtResource( 16 )]
+position = Vector2( 0, -2000 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -500 )
@@ -64,10 +71,12 @@ position = Vector2( 0, -500 )
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
+collision_use_kinematic = true
 collision_mask = 6
 format = 1
 script = ExtResource( 3 )
-x_length = 512
+x_length = 128
+y_depth = 128
 buffer_height = 20
 
 [node name="WaterMap" type="Node2D" parent="TileMap"]
@@ -95,5 +104,12 @@ stream = ExtResource( 10 )
 volume_db = -80.0
 autoplay = true
 
+[node name="SpawnMobsTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+anims/Crashlanding = SubResource( 1 )
+
 [connection signal="finished" from="IntroMusicPlayer" to="." method="_on_IntroMusicPlayer_finished"]
 [connection signal="finished" from="InGameMusicPlayer" to="." method="_on_InGameMusicPlayer_finished"]
+[connection signal="timeout" from="SpawnMobsTimer" to="." method="_on_SpawnMobsTimer_timeout"]

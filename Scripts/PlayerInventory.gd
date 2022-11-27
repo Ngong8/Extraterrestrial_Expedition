@@ -6,17 +6,32 @@ const ITEM_CLASS = preload("res://Scenes/Item.gd")
 const NUM_INVENTORY_SLOTS : int = 24
 const NUM_HOTBAR_SLOTS : int = 8
 var inventory : Dictionary = {
-	0: ["Dirt", 80],
-	1: ["Stone", 16],
-	2: ["Milkore", 34],
+	0: ["EE-suit", 1],
+	1: ["Guardian Suit", 1],
 }
 var hotbar : Dictionary = {
-	0: ["Dirt", 20]
+	0: ["Mining Laser", 1],
+	1: ["Energy Sub-machine Gun", 1],
+	2: ["Energy Scatter Gun", 1],
 }
 var suit : Dictionary = {
-	
+	0: ["Explorer Suit", 1]
 }
 var active_item_slot : int = 0
+var crafting : Dictionary = {
+	0: ["Refined Bar", 1],
+	1: ["Component", 1],
+	2: ["Engine", 1],
+	3: ["Thruster", 1],
+	4: ["Mining Laser", 1],
+	5: ["Mining Laser - MK1", 1],
+	6: ["Mining Laser - MK2", 1],
+	7: ["Energy Sub-machine Gun", 1],
+	8: ["Energy Scatter Gun", 1],
+	9: ["Explorer Suit", 1],
+	10: ["EE-suit", 1],
+	11: ["Guardian Suit", 1],
+}
 
 func _add_item(item_name : String, item_quantity : int) -> void:
 	for item in inventory:

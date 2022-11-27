@@ -4,6 +4,11 @@
 		"StackSize": 99,
 		"Description": "This dirt block looks and functions similar or identical\nto the ones on Earth. Can be placed adjacent to a block."
 	},
+	"Dark Dirt": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "This dirt is very dark and can grow some weird grasses which being looked as skyblue clouds.\nCan be placed adjacent to a block."
+	},
 	"Stone": {
 		"ItemCategory": "Block",
 		"StackSize": 99,
@@ -22,7 +27,32 @@
 	"Magmaore": {
 		"ItemCategory": "Block",
 		"StackSize": 99,
-		"Description": "It emits dim red light and it feels warm when touched it.\nIt doesn't burns despite it looks like a very hot stuff like lava on Earth!"
+		"Description": "It emits dim red light and it feels warm when touched it.\nIt doesn't burns despite it looks like a very hot stuff like lava on Earth!\nAlso, it is very hard to break."
+	},
+	"Refined Bar": {
+		"ItemCategory": "Resource",
+		"StackSize": 99,
+		"Description": "It is refined from milkore.\nCan be used to make something useful such as tools."
+	},
+	"Component": {
+		"ItemCategory": "Resource",
+		"StackSize": 99,
+		"Description": "It is made with refined bars and shinyores.\nCan be used to make advanced tools and other utilities."
+	},
+	"Gel": {
+		"ItemCategory": "Resource",
+		"StackSize": 99,
+		"Description": "It is dropped by a slime.\nCan be used to make tools and other utilities."
+	},
+	"Engine": {
+		"ItemCategory": "Resource",
+		"StackSize": 1,
+		"Description": "A spaceship engine.\nCan compatible with your escape pod, too!"
+	},
+	"Thruster": {
+		"ItemCategory": "Resource",
+		"StackSize": 1,
+		"Description": "A spaceship thruster.\nCan be installed into your escape pod."
 	},
 	"Mining Laser": {
 		"ItemCategory": "Tool",
@@ -48,6 +78,30 @@
 		"ItemAttackRange": 250,
 		"Description": "The MK2 edition of the mining laser can emit more laser points to mine multiple blocks at the same time.\nThey will be constantly spreading around the area where the user point at."
 	},
+	"Energy Sub-machine Gun": {
+		"ItemCategory": "Weapon",
+		"StackSize": 1,
+		"Bullets": 1,
+		"Spread": 2.0,
+		"ItemAttackDMG": 10,
+		"ItemStunDMG": 8,
+		"ItemAttackSpeed": 0.10,
+		"ItemAttackRange": 400,
+		"AttackMode": true,
+		"Description": "This weapon has high firing rate with decent attack capability.\nIt can shoot accurately at mid-range."
+	},
+	"Energy Scatter Gun": {
+		"ItemCategory": "Weapon",
+		"StackSize": 1,
+		"Bullets": 8,
+		"Spread": 7.5,
+		"ItemAttackDMG": 25,
+		"ItemStunDMG": 14,
+		"ItemAttackSpeed": 0.75,
+		"ItemAttackRange": 250,
+		"AttackMode": true,
+		"Description": "This weapon has low firing rate but can shoot multiple projectiles and they scatter randomly.\nIt can only shoot accurately at point-blank range but it deals huge damage when all projectiles shot onto a target."
+	},
 	"Explorer Suit": {
 		"ItemCategory": "Suit",
 		"StackSize": 1,
@@ -71,10 +125,10 @@
 	"Guardian Suit": {
 		"ItemCategory": "Suit",
 		"StackSize": 1,
-		"ItemDefense": 100,
-		"ItemShield": 200,
+		"ItemDefense": 95,
+		"ItemShield": 20000,
 		"ItemShieldRechargeDelay": 3.5,
-		"ItemShieldRechargeRate": 5,
+		"ItemShieldRechargeRate": 25,
 		"ItemDurability": 10000,
 		"Description": "This suit has the highest protection rating in the world, at least, the world of this very game.\nBasically nobody gets to make or access this suit except the scientists in the secret lab at somewhere.\n\nThis hasn't been tested on field so use at your own risk."
 	},

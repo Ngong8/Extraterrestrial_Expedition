@@ -4,6 +4,7 @@ var holding_item : ITEM = null
 onready var inventory_node = get_node("%Inventory")
 var dirt_item : int = 0;	var stone_item : int = 0;	var milkore_item : int = 0
 func _ready() -> void:
+	inventory_node.hide()
 	return
 
 func _input(event: InputEvent) -> void:

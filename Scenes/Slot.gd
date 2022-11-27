@@ -41,6 +41,19 @@ func _refresh_style() -> void:
 		set("custom_styles/panel", default_style)
 		var item_node = get_node_or_null(get_children()[-1].name)
 		hint_tooltip = item_node.item_name + "\n" + item_node.description
+	
+	if slot_type == SLOT_TYPE.SUIT:
+		if item:
+			var suit_item = get_node_or_null(get_children()[-1].name)
+#			var durability = JsonData.item_data[suit_item.item_name]["ItemDurability"]
+#			var armor_rating = JsonData.item_data[suit_item.item_name]["ItemDefense"]
+#			var shield_capacity = JsonData.item_data[suit_item.item_name]["ItemShield"]
+#			var shield_recharge_rate = JsonData.item_data[suit_item.item_name]["ItemShieldRechargeRate"]
+#			var shield_recharge_delay = JsonData.item_data[suit_item.item_name]["ItemShieldRechargeDelay"]
+#			find_parent("Player")._refresh_equipped_armor(durability, armor_rating, shield_capacity, shield_recharge_rate, shield_recharge_delay)
+			find_parent("Player")._refresh_equipped_armor(suit_item)
+		else:
+			find_parent("Player")._refresh_equipped_armor()
 	return
 
 func _pick_from_slot() -> void:

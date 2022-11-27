@@ -20,11 +20,26 @@ func _ready() -> void:
 	return
 
 var description : String;	var category : String;
+var attack_mode : bool
+var current_shield_cap : int;	var shield_cap : int
+var shield_recharge_delay : float;	var shield_recharge_rate : float
+var armor_rating : int
 func _set_item(nm : String, qt : int) -> void:
 	item_name = nm
 	item_icon_name = item_name.to_lower()
 	item_quantity = qt
+	description = JsonData.item_data[item_name]["Description"]
+	category = JsonData.item_data[item_name]["ItemCategory"]
 	icon.texture = load("res://Assets/items/" + item_icon_name + "_item.png")
+	if category == "Weapon":
+		icon.texture = load("res://Assets/items/" + item_icon_name + "_item_1.png")
+		attack_mode = JsonData.item_data[item_name]["AttackMode"]
+	if category == "Suit":
+		shield_cap = JsonData.item_data[item_name]["ItemShield"]
+		current_shield_cap = shield_cap
+		shield_recharge_rate = JsonData.item_data[item_name]["ItemShieldRechargeRate"]
+		shield_recharge_delay = JsonData.item_data[item_name]["ItemShieldRechargeDelay"]
+		armor_rating = JsonData.item_data[item_name]["ItemDefense"]
 	
 	var stack_size = int(JsonData.item_data[item_name]["StackSize"])
 	if stack_size == 1:
@@ -32,8 +47,6 @@ func _set_item(nm : String, qt : int) -> void:
 	else:
 		label.visible = true
 		label.text = str(item_quantity)
-	description = JsonData.item_data[item_name]["Description"]
-	category = JsonData.item_data[item_name]["ItemCategory"]
 	return
 
 func _increase_item_quantity(amount_to_add : int) -> void:

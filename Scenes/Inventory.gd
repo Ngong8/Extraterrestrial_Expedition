@@ -55,7 +55,7 @@ func _slot_gui_input(event: InputEvent, slot: SLOT_CLASS):
 			elif slot.item:
 				_left_click_not_holding(slot)
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	var menus = find_parent("Menus")
 	if menus.holding_item:
 		menus.holding_item.global_position = get_global_mouse_position()
@@ -77,7 +77,7 @@ func _left_click_empty_slot(slot : SLOT_CLASS) -> void:
 		menus.holding_item = null
 	return
 
-func _left_click_different_item(event : InputEvent, slot : SLOT_CLASS) -> void:
+func _left_click_different_item(_event : InputEvent, slot : SLOT_CLASS) -> void:
 	if _able_to_put_into_slot(slot):
 		var menus = find_parent("Menus")
 		PlayerInventory._remove_item(slot)

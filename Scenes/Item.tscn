@@ -24,9 +24,9 @@ expand = true
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
 margin_left = 10.0
-margin_top = 10.0
+margin_top = 12.0
 margin_right = 30.0
-margin_bottom = 30.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 20, 20 )
 custom_fonts/font = SubResource( 1 )
 text = "99"
