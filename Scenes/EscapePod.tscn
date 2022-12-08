@@ -1,27 +1,212 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/escape_pod.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/EscapePod.gd" type="Script" id=2]
+[ext_resource path="res://Assets/fonts/PixelFJVerdana12pt.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/animated/AlertFading.anim" type="Animation" id=4]
 
-[sub_resource type="CircleShape2D" id=3]
-resource_local_to_scene = true
-radius = 64.0
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 320, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 96 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 96 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 12 ) ],
+"loop": false,
+"name": "crashed",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "flying",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 14 ), SubResource( 14 ), SubResource( 13 ), SubResource( 14 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 14 ), SubResource( 14 ), SubResource( 13 ), SubResource( 14 ), SubResource( 13 ), SubResource( 14 ), SubResource( 13 ), SubResource( 17 ), SubResource( 16 ), SubResource( 14 ), SubResource( 14 ), SubResource( 16 ), SubResource( 14 ), SubResource( 14 ), SubResource( 14 ), SubResource( 13 ), SubResource( 14 ), SubResource( 13 ), SubResource( 14 ), SubResource( 14 ), SubResource( 14 ), SubResource( 14 ), SubResource( 14 ) ],
+"loop": false,
+"name": "malfunction",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 60, 60 )
 
 [sub_resource type="CircleShape2D" id=2]
 resource_local_to_scene = true
 radius = 100.0
 
+[sub_resource type="CircleShape2D" id=4]
+radius = 80.0
+
+[sub_resource type="Animation" id=21]
+resource_name = "EndingText"
+length = 18.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Ending:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4, 5.5, 14, 17.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Intro:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 18 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "IntroText"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Intro:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8, 11.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Ending:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 12 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Intro:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/Ending:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Alert:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=20]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=23]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
 [node name="EscapePod" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 2 )
 
-[node name="Graphic" type="Sprite" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2( 2, 2 )
-texture = ExtResource( 1 )
-hframes = 2
+current = true
+zoom = Vector2( 1.2, 1.2 )
+
+[node name="AnimGraphic" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 32 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 11 )
+animation = "flying"
+frame = 3
+playing = true
 
 [node name="Col" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -10 )
 shape = SubResource( 3 )
 
 [node name="CraftingArea" type="Area2D" parent="."]
@@ -32,3 +217,110 @@ monitorable = false
 [node name="Col" type="CollisionShape2D" parent="CraftingArea"]
 self_modulate = Color( 0.0196078, 0.635294, 0, 1 )
 shape = SubResource( 2 )
+
+[node name="EscapeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Col" type="CollisionShape2D" parent="EscapeArea"]
+self_modulate = Color( 1, 0, 0.890196, 1 )
+shape = SubResource( 4 )
+
+[node name="LandingCast" type="RayCast2D" parent="."]
+self_modulate = Color( 0, 0.0156863, 1, 1 )
+show_behind_parent = true
+enabled = true
+cast_to = Vector2( 0, 1500 )
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+autoplay = "IntroText"
+anims/EndingText = SubResource( 21 )
+anims/IntroText = SubResource( 18 )
+anims/RESET = SubResource( 19 )
+
+[node name="AnimPlayer2" type="AnimationPlayer" parent="."]
+anims/AlertFading = ExtResource( 4 )
+anims/RESET = SubResource( 24 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Intro" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Intro"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="IntroLbl" type="Label" parent="CanvasLayer/Intro"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -213.0
+margin_right = 400.0
+margin_bottom = 213.0
+rect_min_size = Vector2( 500, 0 )
+custom_fonts/font = SubResource( 20 )
+text = "You've been assigned to investigate and recover the lost item, which is essential to the company you are working with. It is said to be lost on this unknown lands.
+
+Unfortunately, seems like your ship's thrusters are malfunctioning and will crash onto land of this unknown lands. So brace yourself!"
+valign = 1
+autowrap = true
+
+[node name="Ending" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Ending"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.470588 )
+
+[node name="EndingLbl" type="Label" parent="CanvasLayer/Ending"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -213.0
+margin_right = 400.0
+margin_bottom = 213.0
+rect_min_size = Vector2( 500, 0 )
+custom_fonts/font = SubResource( 20 )
+text = "You've escaped from this unknown lands, and you can rest when you get back to your own place."
+valign = 1
+autowrap = true
+
+[node name="Alert" type="Control" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AlertLbl" type="Label" parent="CanvasLayer/Alert"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -300.0
+margin_top = -426.0
+margin_right = 300.0
+rect_min_size = Vector2( 500, 0 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 23 )
+text = "You don't have the Engine and Thruster to repair the ship!"
+valign = 1
+autowrap = true
+
+[connection signal="body_entered" from="CraftingArea" to="." method="_on_CraftingArea_body_entered"]
+[connection signal="body_exited" from="CraftingArea" to="." method="_on_CraftingArea_body_exited"]
+[connection signal="body_entered" from="EscapeArea" to="." method="_on_EscapeArea_body_entered"]
+[connection signal="body_exited" from="EscapeArea" to="." method="_on_EscapeArea_body_exited"]

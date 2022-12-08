@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/atlas/extraterrestial_items.atlastex" type="Texture" id=1]
+[ext_resource path="res://Assets/items/dirt_item.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/DropLoot.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=2]

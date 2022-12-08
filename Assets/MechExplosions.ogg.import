@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/MechExplosions.ogg-3c6287beba7c0e710b0f4079f6072d0b.oggstr"
+
+[deps]
+
+source_file="res://Assets/MechExplosions.ogg"
+dest_files=[ "res://.import/MechExplosions.ogg-3c6287beba7c0e710b0f4079f6072d0b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

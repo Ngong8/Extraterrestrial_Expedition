@@ -19,24 +19,63 @@ var current_shield_cap : int = 0
 var shield_recharge_gap : int = 30;	var current_recharge_gap : int = 0
 onready var health_bar = get_node("%HealthBar")
 onready var shield_cap_bar = get_node("%ShieldCapBar")
+# Elapsed time
+var time_start = 0;	var time_now = 0;	var elapsed = 0;
+var is_elapsing : bool = true
 func _ready() -> void:
+	hide()
+	$"%HUD".hide()
+	$"%Hotbar".hide()
+	$"%Crafting".hide()
+	$"%GameMenu".hide()
 	des_zoom = camera.zoom
 	current_move_speed = move_speed
+	time_start = OS.get_unix_time()
+	return
+
+var can_move : bool = true;	var can_gravity : bool = true
+func _set_camera(enable : bool = false) -> void:
+	if !enable:
+		can_move = false
+		can_gravity = false
+		$Col.disabled = true
+		$"%HUD".hide()
+		$"%Hotbar".hide()
+		$"%Inventory".hide()
+	else:
+		can_move = true
+		can_gravity = true
+		$Col.disabled = false
+		$"%HUD".show()
+		$"%Hotbar".show()
+	camera.current = enable
+	return
+
+func _go_to_escape_pod(is_visible : bool) -> void:
+	var escape_pod : KinematicBody2D = get_tree().root.get_node("GameWorld").find_node("EscapePod")
+	global_position = escape_pod.global_position
+	if is_visible:	show()
+	else:	hide()
+	$Tool_Weapon.set_physics_process(is_visible)
 	return
 
 var a
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("restart"):
 		a = get_tree().reload_current_scene()
-	if event is InputEventMouseButton && event.is_pressed() :
-		if event.button_index == BUTTON_WHEEL_UP && des_zoom >= MIN_ZOOM_LVL:
-			des_zoom -= current_zoom_spd
-		elif event.button_index == BUTTON_WHEEL_DOWN && des_zoom <= MAX_ZOOM_LVL:
-			des_zoom += current_zoom_spd
+#	if event is InputEventMouseButton && event.is_pressed() :
+#		if event.button_index == BUTTON_WHEEL_UP && des_zoom >= MIN_ZOOM_LVL:
+#			des_zoom -= current_zoom_spd
+#		elif event.button_index == BUTTON_WHEEL_DOWN && des_zoom <= MAX_ZOOM_LVL:
+#			des_zoom += current_zoom_spd
 
 var current_suit : ITEM = null
-var can_move : bool = true
 func _physics_process(delta: float) -> void:
+	# Just for elapsing time until the game is finished.
+	if is_elapsing:
+		time_now = OS.get_unix_time()
+		elapsed = time_now - time_start
+	# Camera and movement related coding
 	camera.zoom = lerp(camera.zoom, des_zoom, 0.25)
 	if can_move:
 		input_strength = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -52,13 +91,17 @@ func _physics_process(delta: float) -> void:
 				velocity.y = -jump_force/8
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
-	velocity.y += gravity * delta
+	velocity.y += gravity * delta if can_gravity else 0 * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	# Health and Shield capacity bars displaying
 	health_bar.max_value = hp
 	health_bar.value = current_hp
 	health_bar.get_node("Label").text = str(current_hp)
 	if current_suit:
+		if current_suit.item_name == "Explorer Suit":
+			$"%HelmetTorsoGraphic".texture = load("res://Assets/characters/character_explorer_helmet_torso.png")
+		if current_suit.item_name == "EE-suit":	$"%HelmetTorsoGraphic".texture = load("res://Assets/characters/character_ee_helmet_torso.png")
+		if current_suit.item_name == "Guardian Suit":	$"%HelmetTorsoGraphic".texture = load("res://Assets/characters/character_guardian_helmet_torso.png")
 		shield_capacity = current_suit.shield_cap
 		current_shield_cap = current_suit.current_shield_cap
 		shield_recharge_rate = current_suit.shield_recharge_rate
@@ -73,6 +116,7 @@ func _physics_process(delta: float) -> void:
 		elif current_shield_cap >= shield_capacity:
 			current_suit.current_shield_cap = shield_capacity
 	else:
+		$"%HelmetTorsoGraphic".texture = load("res://Assets/characters/character_explorer_helmet_torso.png")
 		shield_capacity = 0
 		current_shield_cap = 0
 		shield_recharge_rate = 0.1
@@ -92,7 +136,7 @@ func _take_damage(damage : int = 0, knockback_pos : Vector2 = Vector2(), knockba
 	# Have to do like, whenever is enough or not enough shield capacity to take the last hit, current_hp is always not being reduced until the current shield cap is zero, also current_hp only being reduced if current shield cap is zero and after triggered the longer invincibility timer.
 #	print_debug(damage)
 	if !$InvincibilityTimer.is_stopped():	return
-	if damage > 0:
+	if damage > 0 and can_move:
 		
 		var shield_damage = damage * 5
 #		print_debug(shield_damage)
@@ -103,7 +147,8 @@ func _take_damage(damage : int = 0, knockback_pos : Vector2 = Vector2(), knockba
 				if current_hp > 0:	current_hp -= damage
 				if current_hp <= 0:
 					current_hp = 0
-					can_move = false
+					_death()
+#					can_move = false
 				$InvincibilityTimer.start(2.0)
 				$AnimPlayer.play("Blink")
 				velocity.y -= damage * knockback_mod * 15
@@ -128,7 +173,8 @@ func _take_damage(damage : int = 0, knockback_pos : Vector2 = Vector2(), knockba
 			if current_hp > 0:	current_hp -= damage
 			if current_hp <= 0:
 				current_hp = 0
-				can_move = false
+				_death()
+#				can_move = false
 			$InvincibilityTimer.start(2.0)
 			$AnimPlayer.play("Blink")
 			velocity.y -= damage * knockback_mod * 15
@@ -161,4 +207,28 @@ func _on_RegenerationTimer_timeout() -> void:
 
 func _on_InvincibilityTimer_timeout() -> void:
 	$AnimPlayer.play("RESET")
+	return
+
+func _death() -> void:
+	is_elapsing = false
+	var minutes = elapsed / 60
+	var seconds = elapsed % 60
+	var str_elapsed = "%02d : %02d" % [minutes, seconds]
+	print_debug("elapsed : ", str_elapsed)
+	can_move = false
+	get_node("%GameMenu/Label").text = "You've perished...\nElapsed Time: " + str_elapsed
+	$"%GameMenu".show()
+	$Tool_Weapon.set_physics_process(false)
+#	$Col.disabled = true
+	$AnimPlayer.play("Death")
+	return
+
+func _escaped() -> void:
+	is_elapsing = false
+	var minutes = elapsed / 60
+	var seconds = elapsed % 60
+	var str_elapsed = "%02d : %02d" % [minutes, seconds]
+	print_debug("elapsed : ", str_elapsed)
+	get_node("%GameMenu/Label").text = "Elapsed Time: " + str_elapsed
+	$"%GameMenu".show()
 	return

@@ -11,5 +11,6 @@ func _load_data(file_path):
 	
 	file_data.open(file_path, File.READ)
 	json_data = JSON.parse(file_data.get_as_text())
+#	print_debug(file_data.get_as_text())
 	file_data.close()
 	return json_data.result

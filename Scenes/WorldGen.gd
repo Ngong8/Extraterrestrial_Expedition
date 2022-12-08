@@ -11,7 +11,7 @@ var water_level : int
 export var buffer_height : int = 10
 const SPRITE_RES = preload("res://Scenes/TileSetSpriteTest.tscn")
 
-var cell_names : Dictionary = {"dirt":0, "grass0":5, "grass1":10, "grass2":15, "stone":20, "milkore":27, "darkdirt":35, "cyangrass0":40, "cyangrass1":45, "cyangrass2":50, "basalt":55, "shinyore":64, "magmaore":72}
+var cell_names : Dictionary = {"dirt":0, "grass0":5, "grass1":10, "grass2":15, "stone":20, "milkore":27, "darkdirt":35, "cyangrass0":40, "cyangrass1":45, "cyangrass2":50, "basalt":55, "shinyore":64, "magmaore":72, "bedrock": 88,}
 
 var biome_data : Dictionary = {
 	"plains": ["grass0","grass1","grass2","dirt"],
@@ -41,7 +41,7 @@ func _ready():
 	ore_noise.octaves = 9
 	ore_noise.persistence = 0
 	ore_noise.lacunarity = 0.1
-	ore_noise.period = 6.6 #The farther away from zero the smoother the terrain is going to look
+	ore_noise.period = 16 #The farther away from zero the smoother the terrain is going to look
 	generate_map()
 	
 #	#Set the seed as random numbers
@@ -112,7 +112,7 @@ func generate_map() -> void:
 	for x in range(-x_length,x_length): #Loop through the X length starting from negative to positive
 		var y = ceil(noise.get_noise_1d(x) * height) #Get the noise at the given length and multiply it by the height then round it
 		# From here, for surface and a bit depth for grasses and dirts in different biomes
-		if x > -x_length + 50 and x < x_length - 50:	# Assume regular biome
+		if x > -x_length + 80 and x < x_length - 80:	# Assume regular biome
 			# Random grasses here:
 			biome = biome_data.plains
 			var random_grass : Array = biome
@@ -135,38 +135,39 @@ func generate_map() -> void:
 				if get_cellv(Vector2(x,depth)) == TileMap.INVALID_CELL: #'Air Blocks' are empty cells
 					set_cellv(Vector2(x,depth),cell_names.darkdirt)
 		# Starts from here coding is for more depth with stone blocks
-		for depth in range(y+buffer_height,y_depth-40): #Generate stone n blocks (buffer height) down from the given Y value
-			set_cellv(Vector2(x,depth),cell_names.stone) # Finally, spawn a block whether is stone or ore!
+		for depth in range(y+buffer_height,y_depth / 1.5): #Generate stone n blocks (buffer height) down from the given Y value
+			set_cellv(Vector2(x,depth),cell_names.stone)
+		for depth in range(y_depth / 1.5, y_depth - 40):
+			set_cellv(Vector2(x,depth),cell_names.basalt)
 		for depth in range(y,y_depth): #Start from the Y and go down to the Y depth
 			var yy = cave_noise.get_noise_2d(x,depth) #Get 2d noise from the given X and Y value
 			if abs(yy) < .05: #Check if the absolute value of the noise is less than .05
 				set_cellv(Vector2(x,depth + y),-1) #Remove the block at the given X and Y value
 		for bedrock_depth in range(y_depth-40, y_depth):
-			set_cellv(Vector2(x,bedrock_depth),cell_names.stone)
+			set_cellv(Vector2(x,bedrock_depth),cell_names.bedrock)
 	# Spawn ores in different depths
 	for x in range(-x_length, x_length):
-		for y in y_depth - 40:
-			if get_cell(x,y) == cell_names.stone:
+		for y in y_depth:
+			if get_cell(x,y) == cell_names.stone or get_cell(x,y) == cell_names.basalt:
 				var ore_y = ore_noise.get_noise_2d(x,y)
 				if ore_y > 0.5:
 					var percent : int = (float(y) / float(y_depth)) * 100
 					var oreID = cell_names.stone
 					if percent in range(0,100):
-						if y <= y_depth / 2:
-							if rand_range(0,1) > 0.2:
+						if y <= y_depth / 1.5:
+							var r = rand_range(0,1)
+							if r > 0.2 and r <= 0.65:
 								oreID = cell_names.milkore
+							elif r > 0.65 and r <= 1.0:
+								oreID = cell_names.shinyore
 							else:
 								oreID = cell_names.stone
-						elif y > y_depth / 2 and y <= y_depth / 1.25:
-							if rand_range(0,1) > 0.75:
-								oreID = cell_names.milkore
-							else:
-								oreID = cell_names.shinyore
 						else:
-							if rand_range(0,1) > 0.45:
-								oreID = cell_names.shinyore
-							else:
+							var r = rand_range(0,1)
+							if rand_range(0,1) > 0.55:
 								oreID = cell_names.magmaore
+							else:
+								oreID = cell_names.basalt
 					set_cellv(Vector2(x,y), oreID)
 	return
 

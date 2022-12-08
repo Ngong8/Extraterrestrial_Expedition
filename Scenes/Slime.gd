@@ -25,8 +25,8 @@ func _physics_process(delta: float) -> void:
 		jump_timer.stop()
 		anim_graphic.animation = "on_air"
 		velocity.y += gravity * delta
-		if $LeftRay.is_colliding():	velocity.x += 30
-		elif $RightRay.is_colliding():	velocity.x -= 30
+		if $LeftRay.is_colliding():	velocity.x += 64
+		elif $RightRay.is_colliding():	velocity.x -= 64
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	# Damages the player inside its hitbox, continuously, whenever player's invincibility time is over
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			b._take_damage(atk_damage, global_position)
 	
 	var player : KinematicBody2D = get_tree().root.get_node("GameWorld").find_node("Player")
-	if global_position.distance_squared_to(player.global_position) > 2200*2200:
+	if global_position.distance_squared_to(player.global_position) > 2500*2500:
 		queue_free()
 	return
 

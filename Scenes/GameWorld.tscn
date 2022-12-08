@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/terrain0.tres" type="TileSet" id=2]
@@ -9,26 +9,314 @@
 [ext_resource path="res://Assets/Pandimentional.ogg" type="AudioStream" id=7]
 [ext_resource path="res://addons/water-map/WaterMap.gd" type="Script" id=8]
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player.gd" type="Script" id=9]
-[ext_resource path="res://Assets/03 - Isolation (Exploration Theme 02).mp3" type="AudioStream" id=10]
+[ext_resource path="res://Assets/ambient-pop.wav" type="AudioStream" id=10]
 [ext_resource path="res://Assets/background_plains-Sheet1.png" type="Texture" id=11]
 [ext_resource path="res://Assets/background_plains-Sheet4.png" type="Texture" id=12]
-[ext_resource path="res://Assets/background_plains-Sheet5.png" type="Texture" id=13]
+[ext_resource path="res://Assets/80s-retro-fight-game-theme-loo.wav" type="AudioStream" id=13]
 [ext_resource path="res://Assets/background_plains-Sheet3.png" type="Texture" id=14]
 [ext_resource path="res://Assets/background_plains-Sheet2.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/EscapePod.tscn" type="PackedScene" id=16]
 [ext_resource path="res://addons/nklbdev.parallax/Parallax.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/LostItem.tscn" type="PackedScene" id=18]
+
+[sub_resource type="Animation" id=7]
+resource_name = "BeatFinalBoss"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BossMusicPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "Crashlanding"
-length = 5.0
-step = 0.01
+length = 21.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("EscapePod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 21 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "_set_camera"
+}, {
+"args": [ false ],
+"method": "_set_camera"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 20.9, 21 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_set_camera"
+}, {
+"args": [ true ],
+"method": "_go_to_escape_pod"
+}, {
+"args": [ true ],
+"method": "_set_camera"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Parallax2:motion_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 12.5, 16, 21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Parallax3:motion_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 15, 17, 21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Parallax4:motion_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 17.5, 19.25, 21 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Escaping"
+length = 20.0
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("EscapePod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "_set_camera"
+} ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Player")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 18 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "_go_to_escape_pod"
+}, {
+"args": [ false ],
+"method": "_set_camera"
+}, {
+"args": [  ],
+"method": "_escaped"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Parallax2:motion_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 7.5, 9.5, 15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.6 ), Vector2( 1, 0.6 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Parallax3:motion_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 5.5, 7.5, 15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.6 ), Vector2( 1, 0.6 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Parallax4:motion_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.5, 4.5, 15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.6 ), Vector2( 1, 0.6 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "FinalBoss"
+length = 21.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("IntroMusicPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("InGameMusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Parallax:motion_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Parallax2:motion_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Parallax3:motion_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Parallax4:motion_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("IntroMusicPlayer:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("InGameMusicPlayer:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BossMusicPlayer:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+resource_local_to_scene = true
+extents = Vector2( 32, 10000 )
+
+[sub_resource type="RectangleShape2D" id=4]
+resource_local_to_scene = true
+extents = Vector2( 10000, 32 )
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="Parallax" type="Node2D" parent="."]
 modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
-position = Vector2( 151.478, 186.418 )
+position = Vector2( -16.6123, 729.617 )
 script = ExtResource( 17 )
 enabled_in_editor = true
 motion_scale = Vector2( 1, 1 )
@@ -37,33 +325,44 @@ motion_scale = Vector2( 1, 1 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 11 )
 
-[node name="Sprite2" type="Sprite" parent="Parallax"]
-scale = Vector2( 5, 5 )
-texture = ExtResource( 15 )
-
 [node name="Parallax2" type="Node2D" parent="."]
 modulate = Color( 0.780392, 0.780392, 0.780392, 1 )
-position = Vector2( 151.478, 186.418 )
+position = Vector2( -16.6123, 729.617 )
 script = ExtResource( 17 )
 enabled_in_editor = true
 motion_scale = Vector2( 1, 1 )
 
-[node name="Sprite3" type="Sprite" parent="Parallax2"]
+[node name="Sprite2" type="Sprite" parent="Parallax2"]
+scale = Vector2( 5, 5 )
+texture = ExtResource( 15 )
+
+[node name="Parallax3" type="Node2D" parent="."]
+modulate = Color( 0.780392, 0.780392, 0.780392, 1 )
+position = Vector2( -16.6123, 729.617 )
+script = ExtResource( 17 )
+enabled_in_editor = true
+motion_scale = Vector2( 1, 1 )
+
+[node name="Sprite3" type="Sprite" parent="Parallax3"]
 scale = Vector2( 5, 5 )
 texture = ExtResource( 14 )
 
-[node name="Sprite4" type="Sprite" parent="Parallax2"]
+[node name="Parallax4" type="Node2D" parent="."]
+modulate = Color( 0.780392, 0.780392, 0.780392, 1 )
+position = Vector2( -16.6123, 729.617 )
+script = ExtResource( 17 )
+enabled_in_editor = true
+motion_scale = Vector2( 1, 1 )
+
+[node name="Sprite4" type="Sprite" parent="Parallax4"]
 scale = Vector2( 5, 5 )
 texture = ExtResource( 12 )
-
-[node name="Sprite5" type="Sprite" parent="Parallax2"]
-scale = Vector2( 5, 5 )
-texture = ExtResource( 13 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="EscapePod" parent="." instance=ExtResource( 16 )]
-position = Vector2( 0, -2000 )
+position = Vector2( 0, -7500 )
+gravity = 350
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -500 )
@@ -75,8 +374,6 @@ collision_use_kinematic = true
 collision_mask = 6
 format = 1
 script = ExtResource( 3 )
-x_length = 128
-y_depth = 128
 buffer_height = 20
 
 [node name="WaterMap" type="Node2D" parent="TileMap"]
@@ -90,26 +387,57 @@ zoom = Vector2( 2, 2 )
 script = ExtResource( 5 )
 
 [node name="IntroMusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 6 )
 
 [node name="InGameMusicPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource( 9 )
-samples = [ ExtResource( 6 ) ]
+samples = [ ExtResource( 7 ) ]
 random_strategy = 2
 random_volume_range = 0
 random_pitch_range = 0
 
-[node name="IsolateMusicPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BossMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="EndingMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = -80.0
-autoplay = true
 
 [node name="SpawnMobsTimer" type="Timer" parent="."]
 wait_time = 5.0
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Crashlanding"
+anims/BeatFinalBoss = SubResource( 7 )
 anims/Crashlanding = SubResource( 1 )
+anims/Escaping = SubResource( 5 )
+anims/FinalBoss = SubResource( 6 )
+anims/RESET = SubResource( 2 )
+
+[node name="LostItem" parent="." instance=ExtResource( 18 )]
+position = Vector2( 0, 1000 )
+z_index = 5
+
+[node name="Barrier" type="StaticBody2D" parent="."]
+collision_mask = 14
+
+[node name="ColLeft" type="CollisionShape2D" parent="Barrier"]
+position = Vector2( -8192, 0 )
+shape = SubResource( 3 )
+
+[node name="ColRight" type="CollisionShape2D" parent="Barrier"]
+position = Vector2( 8192, 0 )
+shape = SubResource( 3 )
+
+[node name="ColBottom" type="CollisionShape2D" parent="Barrier"]
+position = Vector2( 0, 8192 )
+shape = SubResource( 4 )
+
+[node name="CallMechBossTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
 
 [connection signal="finished" from="IntroMusicPlayer" to="." method="_on_IntroMusicPlayer_finished"]
 [connection signal="finished" from="InGameMusicPlayer" to="." method="_on_InGameMusicPlayer_finished"]
 [connection signal="timeout" from="SpawnMobsTimer" to="." method="_on_SpawnMobsTimer_timeout"]
+[connection signal="animation_finished" from="AnimPlayer" to="." method="_on_AnimPlayer_animation_finished"]
+[connection signal="timeout" from="CallMechBossTimer" to="." method="_on_CallMechBossTimer_timeout"]

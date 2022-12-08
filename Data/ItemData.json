@@ -2,7 +2,7 @@
 	"Dirt": {
 		"ItemCategory": "Block",
 		"StackSize": 99,
-		"Description": "This dirt block looks and functions similar or identical\nto the ones on Earth. Can be placed adjacent to a block."
+		"Description": "This dirt block looks and functions similar or identical to the ones on Earth.\nCan be placed adjacent to a block."
 	},
 	"Dark Dirt": {
 		"ItemCategory": "Block",
@@ -12,7 +12,17 @@
 	"Stone": {
 		"ItemCategory": "Block",
 		"StackSize": 99,
-		"Description": "This stone block looks and functions similar or identical\nto the ones on Earth. Can be placed adjacent to a block."
+		"Description": "This stone block looks and functions similar or identical to the ones on Earth.\nCan be placed adjacent to a block."
+	},
+	"Basalt": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "This hardened stone block looks and functions similar or identical to the ones on Earth.\nCan be placed adjacent to a block."
+	},
+	"Bedrock": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Description": "This stone block is basically impossible to break, just like that block in that popular sandbox voxel game.\nCan be placed adjacent to a block."
 	},
 	"Milkore": {
 		"ItemCategory": "Block",
@@ -22,21 +32,36 @@
 	"Shinyore": {
 		"ItemCategory": "Block",
 		"StackSize": 99,
-		"Description": "This ore is shiny! It probably contains some sort of chemicals\n for chemical reaction to make itself illuminate instead of shine through visible light.\nIt can be used to craft components which later on for crafting more advanced utilities."
+		"Description": "This ore is shiny! It probably contains some sort of chemicals\nfor chemical reaction to make itself illuminate instead of shine through visible light.\nIt can be used to craft components which later on for crafting more advanced utilities."
 	},
 	"Magmaore": {
 		"ItemCategory": "Block",
 		"StackSize": 99,
 		"Description": "It emits dim red light and it feels warm when touched it.\nIt doesn't burns despite it looks like a very hot stuff like lava on Earth!\nAlso, it is very hard to break."
 	},
+	"Steel Block": {
+		"ItemCategory": "Block",
+		"StackSize": 99,
+		"Recipe":{
+			"Refined Bar": 4
+		},
+		"Description": "This block is made with refined bars to build a foundation of a building.\nCan be placed adjacent to a block."
+	},
 	"Refined Bar": {
 		"ItemCategory": "Resource",
 		"StackSize": 99,
+		"Recipe":{
+			"Milkore": 1
+		},
 		"Description": "It is refined from milkore.\nCan be used to make something useful such as tools."
 	},
 	"Component": {
 		"ItemCategory": "Resource",
 		"StackSize": 99,
+		"Recipe":{
+			"Refined Bar": 1,
+			"Shinyore": 2
+		},
 		"Description": "It is made with refined bars and shinyores.\nCan be used to make advanced tools and other utilities."
 	},
 	"Gel": {
@@ -47,40 +72,72 @@
 	"Engine": {
 		"ItemCategory": "Resource",
 		"StackSize": 1,
+		"Recipe":{
+			"Refined Bar": 10,
+			"Component": 5,
+			"Magmaore": 5
+		},
 		"Description": "A spaceship engine.\nCan compatible with your escape pod, too!"
 	},
 	"Thruster": {
 		"ItemCategory": "Resource",
 		"StackSize": 1,
+		"Recipe":{
+			"Refined Bar": 4,
+			"Component": 2,
+			"Magmaore": 1
+		},
 		"Description": "A spaceship thruster.\nCan be installed into your escape pod."
 	},
 	"Mining Laser": {
 		"ItemCategory": "Tool",
 		"StackSize": 1,
-		"ItemAttackDMG": 5,
-		"ItemAttackSpeed": 0.15,
+		"Recipe":{
+			"Refined Bar": 3,
+			"Gel": 5,
+			"Component": 1
+		},
+		"ItemAttackDMG": 4,
+		"ItemAttackSpeed": 0.12,
 		"ItemAttackRange": 150,
 		"Description": "A laser that is designed to mine dirts, stones and ores,\nslow mining power, but it gets the job done."
 	},
 	"Mining Laser - MK1": {
 		"ItemCategory": "Tool",
 		"StackSize": 1,
-		"ItemAttackDMG": 10,
-		"ItemAttackSpeed": 0.12,
+		"Recipe":{
+			"Mining Laser": 1,
+			"Refined Bar": 1,
+			"Gel": 2,
+			"Component": 2
+		},
+		"ItemAttackDMG": 5,
+		"ItemAttackSpeed": 0.10,
 		"ItemAttackRange": 200,
 		"Description": "This is an improved version of the mining laser tool.\nThe speed of this tool is slightly faster than the basic one."
 	},
 	"Mining Laser - MK2": {
 		"ItemCategory": "Tool",
 		"StackSize": 1,
-		"ItemAttackDMG": 25,
-		"ItemAttackSpeed": 0.10,
+		"Recipe":{
+			"Mining Laser - MK1": 1,
+			"Refined Bar": 2,
+			"Gel": 4,
+			"Component": 2
+		},
+		"ItemAttackDMG": 5,
+		"ItemAttackSpeed": 0.08,
 		"ItemAttackRange": 250,
 		"Description": "The MK2 edition of the mining laser can emit more laser points to mine multiple blocks at the same time.\nThey will be constantly spreading around the area where the user point at."
 	},
 	"Energy Sub-machine Gun": {
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
+		"Recipe":{
+			"Refined Bar": 3,
+			"Gel": 5,
+			"Component": 2
+		},
 		"Bullets": 1,
 		"Spread": 2.0,
 		"ItemAttackDMG": 10,
@@ -93,9 +150,14 @@
 	"Energy Scatter Gun": {
 		"ItemCategory": "Weapon",
 		"StackSize": 1,
+		"Recipe":{
+			"Refined Bar": 5,
+			"Gel": 8,
+			"Component": 4
+		},
 		"Bullets": 8,
 		"Spread": 7.5,
-		"ItemAttackDMG": 25,
+		"ItemAttackDMG": 18,
 		"ItemStunDMG": 14,
 		"ItemAttackSpeed": 0.75,
 		"ItemAttackRange": 250,
@@ -105,8 +167,12 @@
 	"Explorer Suit": {
 		"ItemCategory": "Suit",
 		"StackSize": 1,
+		"Recipe":{
+			"Refined Bar": 8,
+			"Component": 1
+		},
 		"ItemDefense": 50,
-		"ItemShield": 1000,
+		"ItemShield": 500,
 		"ItemShieldRechargeDelay": 2.5,
 		"ItemShieldRechargeRate": 10,
 		"ItemDurability": 500,
@@ -115,6 +181,11 @@
 	"EE-suit": {
 		"ItemCategory": "Suit",
 		"StackSize": 1,
+		"Recipe":{
+			"Refined Bar": 12,
+			"Gel": 6,
+			"Component": 2
+		},
 		"ItemDefense": 20,
 		"ItemShield": 2500,
 		"ItemShieldRechargeDelay": 2.25,
@@ -125,11 +196,17 @@
 	"Guardian Suit": {
 		"ItemCategory": "Suit",
 		"StackSize": 1,
+		"Recipe":{
+			"Refined Bar": 24,
+			"Gel": 12,
+			"Component": 5,
+			"Magmaore": 4
+		},
 		"ItemDefense": 95,
-		"ItemShield": 20000,
+		"ItemShield": 10000,
 		"ItemShieldRechargeDelay": 3.5,
-		"ItemShieldRechargeRate": 25,
+		"ItemShieldRechargeRate": 40,
 		"ItemDurability": 10000,
-		"Description": "This suit has the highest protection rating in the world, at least, the world of this very game.\nBasically nobody gets to make or access this suit except the scientists in the secret lab at somewhere.\n\nThis hasn't been tested on field so use at your own risk."
+		"Description": "This suit has the highest protection rating in the world, at least, the world of this very game.\nBasically nobody gets to make or access this suit except the scientists in the secret lab at somewhere.\n\nThis hasn't been tested on field, so use at your own risk, and it emits some sort of signals\nwhich there is a certain amounts of mechanical things could be awakened by this."
 	},
 }

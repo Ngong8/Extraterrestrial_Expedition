@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Scenes/Tool_Weapon.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -14,36 +14,23 @@
 [ext_resource path="res://Assets/items/equip_suit_slot.png" type="Texture" id=12]
 [ext_resource path="res://Scenes/Crafting.gd" type="Script" id=13]
 [ext_resource path="res://Assets/characters/character_explorer_helmet_torso.png" type="Texture" id=14]
-[ext_resource path="res://Assets/characters/character_explorer_hands.png" type="Texture" id=15]
+[ext_resource path="res://Assets/characters/chracter_hands.png" type="Texture" id=15]
 [ext_resource path="res://Assets/animated/shield_barrier.png" type="Texture" id=16]
-[ext_resource path="res://Assets/characters/character_explorer_legs.png" type="Texture" id=17]
+[ext_resource path="res://Assets/characters/character_legs.png" type="Texture" id=17]
 [ext_resource path="res://Assets/characters/character_head.png" type="Texture" id=18]
-
-[sub_resource type="StyleBoxFlat" id=29]
-bg_color = Color( 1, 0, 0, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id=30]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
+[ext_resource path="res://Assets/animated/Shielding.anim" type="Animation" id=19]
+[ext_resource path="res://Assets/styles/ShieldCapBarFG.stylebox" type="StyleBox" id=20]
+[ext_resource path="res://Assets/styles/BarsBG.stylebox" type="StyleBox" id=21]
+[ext_resource path="res://Assets/styles/HealthBarFG.stylebox" type="StyleBox" id=22]
+[ext_resource path="res://Assets/styles/RestartBtn.stylebox" type="StyleBox" id=23]
+[ext_resource path="res://Assets/styles/QuitBtn.stylebox" type="StyleBox" id=24]
+[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player.gd" type="Script" id=25]
+[ext_resource path="res://Assets/BassShoot0.wav" type="AudioStream" id=26]
+[ext_resource path="res://Assets/PewSFX2.wav" type="AudioStream" id=27]
+[ext_resource path="res://Assets/PewSFX0.wav" type="AudioStream" id=28]
+[ext_resource path="res://Assets/PewSFX1.wav" type="AudioStream" id=29]
+[ext_resource path="res://Assets/BassShoot1.wav" type="AudioStream" id=30]
+[ext_resource path="res://Assets/BassShoot2.wav" type="AudioStream" id=31]
 
 [sub_resource type="DynamicFont" id=28]
 size = 8
@@ -51,35 +38,15 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="StyleBoxFlat" id=25]
-bg_color = Color( 0, 1, 0.929412, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-corner_detail = 1
-
-[sub_resource type="StyleBoxFlat" id=26]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-corner_detail = 1
-
 [sub_resource type="DynamicFont" id=34]
 size = 12
 outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=54]
+size = 8
+outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 11 )
 
@@ -90,16 +57,108 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 11 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="DynamicFont" id=48]
+size = 24
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=49]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxFlat" id=50]
+bg_color = Color( 0.145098, 0.635294, 0.47451, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=51]
+bg_color = Color( 0.0941176, 0.282353, 0.219608, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=52]
+bg_color = Color( 0.784314, 0.533333, 0, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=53]
+bg_color = Color( 0.47451, 0.321569, 0, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 1
+
+[sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 17 )
 region = Rect2( 0, 0, 24, 12 )
 
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 17 )
+region = Rect2( 24, 0, 24, 12 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 17 )
+region = Rect2( 48, 0, 24, 12 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 12, 24, 12 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 17 )
+region = Rect2( 24, 12, 24, 12 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 17 )
+region = Rect2( 48, 12, 24, 12 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 24, 24, 12 )
+
 [sub_resource type="SpriteFrames" id=36]
 animations = [ {
-"frames": [ SubResource( 35 ) ],
+"frames": [ SubResource( 55 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ) ],
+"loop": true,
+"name": "walking",
+"speed": 24.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -199,6 +258,10 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=47]
+resource_name = "Death"
+step = 0.01
+
 [sub_resource type="Animation" id=32]
 length = 0.001
 tracks/0/type = "value"
@@ -250,30 +313,15 @@ tracks/3/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=33]
-resource_name = "Shielding"
-length = 0.36
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath("ShieldBarrier:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 11, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
-}
-
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 zoom = Vector2( 1.2, 1.2 )
+limit_left = -8192
+limit_right = 8192
+limit_bottom = 7680
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 10.0
@@ -288,6 +336,7 @@ anchor_bottom = 1.0
 mouse_filter = 1
 
 [node name="HUD" type="Control" parent="Camera2D/Menus/GUIs"]
+unique_name_in_owner = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -280.0
@@ -302,8 +351,8 @@ margin_top = 10.0
 margin_right = -10.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 80, 0 )
-custom_styles/fg = SubResource( 29 )
-custom_styles/bg = SubResource( 30 )
+custom_styles/fg = ExtResource( 22 )
+custom_styles/bg = ExtResource( 21 )
 value = 25.0
 percent_visible = false
 
@@ -330,8 +379,8 @@ margin_top = 70.0
 margin_right = -10.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 80, 0 )
-custom_styles/fg = SubResource( 25 )
-custom_styles/bg = SubResource( 26 )
+custom_styles/fg = ExtResource( 20 )
+custom_styles/bg = ExtResource( 21 )
 max_value = 1000.0
 value = 250.0
 percent_visible = false
@@ -364,6 +413,20 @@ custom_fonts/font = SubResource( 34 )
 text = "Mode: Attack"
 align = 2
 valign = 1
+
+[node name="QuestLbl" type="Label" parent="Camera2D/Menus/GUIs/HUD"]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -240.0
+margin_top = -160.0
+rect_min_size = Vector2( 240, 80 )
+custom_fonts/font = SubResource( 54 )
+text = "Objective:
+Find and recover that lost item."
+autowrap = true
 
 [node name="Inventory" type="Control" parent="Camera2D/Menus/GUIs"]
 unique_name_in_owner = true
@@ -815,9 +878,64 @@ rect_min_size = Vector2( 40, 40 )
 custom_styles/panel = ExtResource( 6 )
 script = ExtResource( 9 )
 
+[node name="CraftSlot13" type="Panel" parent="Camera2D/Menus/GUIs/Crafting/CraftGrids"]
+margin_top = 88.0
+margin_right = 40.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 40, 40 )
+custom_styles/panel = ExtResource( 6 )
+script = ExtResource( 9 )
+
+[node name="GameMenu" type="Control" parent="Camera2D/Menus/GUIs"]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 400, 400 )
+
+[node name="Label" type="Label" parent="Camera2D/Menus/GUIs/GameMenu"]
+anchor_right = 1.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 48 )
+text = "You've perished..."
+align = 1
+valign = 1
+
+[node name="RestartBtn" type="Button" parent="Camera2D/Menus/GUIs/GameMenu"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -30.0
+margin_right = 160.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 49 )
+custom_styles/hover = SubResource( 50 )
+custom_styles/pressed = SubResource( 51 )
+custom_styles/normal = ExtResource( 23 )
+text = "Restart"
+
+[node name="QuitBtn" type="Button" parent="Camera2D/Menus/GUIs/GameMenu"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -30.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 49 )
+custom_styles/hover = SubResource( 52 )
+custom_styles/pressed = SubResource( 53 )
+custom_styles/normal = ExtResource( 24 )
+text = "Quit"
+
 [node name="HeadGraphic" type="Sprite" parent="."]
 unique_name_in_owner = true
 position = Vector2( 0, -14 )
+z_index = 4
 texture = ExtResource( 18 )
 flip_h = true
 hframes = 3
@@ -825,12 +943,14 @@ hframes = 3
 [node name="HelmetTorsoGraphic" type="Sprite" parent="."]
 unique_name_in_owner = true
 position = Vector2( -1, -2 )
+z_index = 4
 texture = ExtResource( 14 )
 flip_h = true
 
 [node name="LegsGraphic" type="AnimatedSprite" parent="."]
 unique_name_in_owner = true
-position = Vector2( -1, 31 )
+position = Vector2( -1, 29 )
+z_index = 4
 frames = SubResource( 36 )
 animation = "idle"
 flip_h = true
@@ -838,6 +958,7 @@ flip_h = true
 [node name="ShieldBarrier" type="Sprite" parent="."]
 unique_name_in_owner = true
 scale = Vector2( 0.7, 1.05 )
+z_index = 4
 texture = ExtResource( 16 )
 hframes = 6
 vframes = 2
@@ -859,16 +980,6 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="ToolGraphic" type="Sprite" parent="Tool_Weapon/Hands"]
-unique_name_in_owner = true
-position = Vector2( 20, 0 )
-texture = ExtResource( 3 )
-
-[node name="AtkCast" type="RayCast2D" parent="Tool_Weapon/Hands"]
-unique_name_in_owner = true
-cast_to = Vector2( 150, 0 )
-collision_mask = 0
-
 [node name="AtkArea" type="Area2D" parent="Tool_Weapon/Hands"]
 unique_name_in_owner = true
 position = Vector2( 60, 0 )
@@ -880,27 +991,45 @@ monitorable = false
 [node name="Col" type="CollisionShape2D" parent="Tool_Weapon/Hands/AtkArea"]
 shape = SubResource( 2 )
 
-[node name="Indicator" type="Sprite" parent="Tool_Weapon/Hands/AtkArea"]
+[node name="ToolGraphic" type="Sprite" parent="Tool_Weapon/Hands"]
+unique_name_in_owner = true
+position = Vector2( 20, 0 )
+z_index = 4
+texture = ExtResource( 3 )
+
+[node name="AtkCast" type="RayCast2D" parent="Tool_Weapon/Hands"]
+unique_name_in_owner = true
+cast_to = Vector2( 150, 0 )
+collision_mask = 0
+
+[node name="Indicator" type="Sprite" parent="Tool_Weapon/Hands"]
 unique_name_in_owner = true
 show_behind_parent = true
 light_mask = 0
+position = Vector2( 60, 0 )
 scale = Vector2( 0.7, 0.7 )
+z_index = 5
 texture = ExtResource( 4 )
 
-[node name="BeamEffect" type="AnimatedSprite" parent="Tool_Weapon/Hands/AtkArea"]
+[node name="BeamEffect" type="AnimatedSprite" parent="Tool_Weapon/Hands"]
 unique_name_in_owner = true
 self_modulate = Color( 0, 0.952941, 1, 1 )
+show_behind_parent = true
+position = Vector2( 60, 0 )
 scale = Vector2( 0.75, 0.75 )
+z_index = 5
 frames = SubResource( 23 )
-frame = 3
+frame = 9
 playing = true
 
 [node name="HandGraphic" type="Sprite" parent="Tool_Weapon"]
 unique_name_in_owner = true
 position = Vector2( 0, 7 )
+z_index = 4
 texture = ExtResource( 15 )
 flip_h = true
-hframes = 2
+hframes = 3
+vframes = 2
 frame = 1
 
 [node name="SwingTimer" type="Timer" parent="Tool_Weapon"]
@@ -908,6 +1037,21 @@ one_shot = true
 
 [node name="AtkDelayTimer" type="Timer" parent="Tool_Weapon"]
 one_shot = true
+
+[node name="ScatterGunSFX" type="AudioStreamPlayer" parent="Tool_Weapon"]
+volume_db = -5.0
+pitch_scale = 1.25
+script = ExtResource( 25 )
+samples = [ ExtResource( 26 ), ExtResource( 30 ), ExtResource( 31 ) ]
+random_volume_range = 0
+random_pitch_range = 0.1
+
+[node name="SMGSFX" type="AudioStreamPlayer" parent="Tool_Weapon"]
+script = ExtResource( 25 )
+samples = [ ExtResource( 28 ), ExtResource( 29 ), ExtResource( 27 ) ]
+random_strategy = 2
+random_volume_range = 0
+random_pitch_range = 0.25
 
 [node name="Col" type="CollisionShape2D" parent="."]
 modulate = Color( 0.12549, 0, 1, 1 )
@@ -926,9 +1070,12 @@ autostart = true
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
 anims/Blink = SubResource( 31 )
+anims/Death = SubResource( 47 )
 anims/RESET = SubResource( 32 )
-anims/Shielding = SubResource( 33 )
+anims/Shielding = ExtResource( 19 )
 
+[connection signal="pressed" from="Camera2D/Menus/GUIs/GameMenu/RestartBtn" to="Camera2D/Menus" method="_on_RestartBtn_pressed"]
+[connection signal="pressed" from="Camera2D/Menus/GUIs/GameMenu/QuitBtn" to="Camera2D/Menus" method="_on_QuitBtn_pressed"]
 [connection signal="timeout" from="Tool_Weapon/SwingTimer" to="Tool_Weapon" method="_on_SwingTimer_timeout"]
 [connection signal="timeout" from="Tool_Weapon/AtkDelayTimer" to="Tool_Weapon" method="_on_AtkDelayTimer_timeout"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]

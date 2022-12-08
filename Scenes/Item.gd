@@ -24,12 +24,16 @@ var attack_mode : bool
 var current_shield_cap : int;	var shield_cap : int
 var shield_recharge_delay : float;	var shield_recharge_rate : float
 var armor_rating : int
+var recipe
 func _set_item(nm : String, qt : int) -> void:
 	item_name = nm
 	item_icon_name = item_name.to_lower()
 	item_quantity = qt
 	description = JsonData.item_data[item_name]["Description"]
 	category = JsonData.item_data[item_name]["ItemCategory"]
+	if JsonData.item_data[item_name].has("Recipe"):
+		recipe = JsonData.item_data[item_name]["Recipe"]
+#		print_debug(recipe)
 	icon.texture = load("res://Assets/items/" + item_icon_name + "_item.png")
 	if category == "Weapon":
 		icon.texture = load("res://Assets/items/" + item_icon_name + "_item_1.png")

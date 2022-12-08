@@ -6,32 +6,40 @@ const ITEM_CLASS = preload("res://Scenes/Item.gd")
 const NUM_INVENTORY_SLOTS : int = 24
 const NUM_HOTBAR_SLOTS : int = 8
 var inventory : Dictionary = {
-	0: ["EE-suit", 1],
-	1: ["Guardian Suit", 1],
+	
 }
 var hotbar : Dictionary = {
 	0: ["Mining Laser", 1],
-	1: ["Energy Sub-machine Gun", 1],
-	2: ["Energy Scatter Gun", 1],
 }
 var suit : Dictionary = {
-	0: ["Explorer Suit", 1]
+	0: ["Guardian Suit", 1]
 }
 var active_item_slot : int = 0
 var crafting : Dictionary = {
-	0: ["Refined Bar", 1],
+	0: ["Refined Bar", 4],
 	1: ["Component", 1],
-	2: ["Engine", 1],
-	3: ["Thruster", 1],
-	4: ["Mining Laser", 1],
-	5: ["Mining Laser - MK1", 1],
+	2: ["Steel Block", 4],
+	3: ["Mining Laser", 1],
+	4: ["Mining Laser - MK1", 1],
+	5: ["Energy Sub-machine Gun", 1],
 	6: ["Mining Laser - MK2", 1],
-	7: ["Energy Sub-machine Gun", 1],
-	8: ["Energy Scatter Gun", 1],
-	9: ["Explorer Suit", 1],
-	10: ["EE-suit", 1],
-	11: ["Guardian Suit", 1],
+	7: ["Energy Scatter Gun", 1],
+	8: ["Explorer Suit", 1],
+	9: ["EE-suit", 1],
+	10: ["Engine", 1],
+	11: ["Thruster", 1],
+	12: ["Guardian Suit", 1],
 }
+
+func _process(delta: float) -> void:
+	if suit:
+		if suit[0][0] == "Guardian Suit" and !get_tree().root.get_node("GameWorld").call_once:
+			get_tree().root.get_node("GameWorld/AnimPlayer").play("FinalBoss")
+			get_tree().root.get_node("GameWorld/CallMechBossTimer").start()
+			get_tree().root.get_node("GameWorld").call_once = true
+			print_debug("Called a boss")
+#			print_debug(suit[0][0])
+	return
 
 func _add_item(item_name : String, item_quantity : int) -> void:
 	for item in inventory:

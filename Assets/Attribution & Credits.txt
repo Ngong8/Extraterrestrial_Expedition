@@ -1,14 +1,21 @@
 Pixel Arts:
 https://kiddolink.itch.io/parallax-background-plains-pixel-art
-https://silvdragoon-d.itch.io/cave-tileset
-
 
 Audio:
 https://freesound.org/people/X3nus/sounds/512089/
+A Different Kind Of Journey - Composed by One Man Symphony
+https://sulosounds.itch.io/100-songs
+
+
+
+
+
+# Unused:
+https://silvdragoon-d.itch.io/cave-tileset
 https://opengameart.org/content/up-in-the-sky
-Music by <a href="https://pixabay.com/users/lvymusic-27953103/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=124841">lvymusic</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=124841">Pixabay</a>
+https://freesound.org/people/Mrthenoronha/sounds/507705/
+# No direct linking:
+https://www.reddit.com/r/godot/comments/ykrwl1/ive_released_over_50_tracks_in_different_genres/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
+https://www.reddit.com/r/gamedev/comments/z74sum/ive_uploaded_my_full_music_library_with_100_songs/
 
-
-https://www.reddit.com/r/godot/comments/ykrwl1/ive_released_over_50_tracks_in_different_genres/
-
-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
+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

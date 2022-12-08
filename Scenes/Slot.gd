@@ -33,6 +33,17 @@ func _refresh_style() -> void:
 	if slot_type == SLOT_TYPE.HOTBAR and PlayerInventory.active_item_slot == slot_index:
 		hint_tooltip = ""
 		set("custom_styles/panel", selected_style)
+	elif slot_type == SLOT_TYPE.CRAFTING:
+		hint_tooltip = ""
+		set("custom_styles/panel", default_style)
+		var item_node = get_node_or_null(get_children()[-1].name)
+		var recipe_text : String = ""
+		for i in item_node.recipe.keys():
+			var j = item_node.recipe[i]
+			recipe_text += i + ": " + str(j) + "\n"
+#		print_debug(recipe_text)
+		hint_tooltip = item_node.item_name + "\n" + item_node.description + "\n\n" + str(recipe_text)
+		return
 	elif item == null:
 		hint_tooltip = ""
 		set("custom_styles/panel", vacant_style)

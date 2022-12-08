@@ -37,6 +37,7 @@ monitorable = false
 script = ExtResource( 2 )
 
 [node name="AnimGraphic" type="AnimatedSprite" parent="."]
+z_index = 4
 frames = SubResource( 6 )
 frame = 1
 playing = true
@@ -50,5 +51,6 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_EnergyPulse_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_EnergyPulse_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]

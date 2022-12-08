@@ -24,6 +24,7 @@ func _initialize_inventory() -> void:
 		if PlayerInventory.inventory.has(i):
 #			print_debug(PlayerInventory.inventory[i][0])
 			slots[i]._initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
+			print_debug(slots[i].item.item_name)
 	return
 
 func _initialize_suit() -> void:

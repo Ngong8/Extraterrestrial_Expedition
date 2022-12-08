@@ -1,9 +1,6 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://Assets/extraterrestial_tileset.png" type="Texture" id=1]
+[gd_scene format=2]
 
 [node name="TileSetSpriteTest" type="Sprite"]
-texture = ExtResource( 1 )
 centered = false
 hframes = 11
 vframes = 10

@@ -132,10 +132,14 @@ func _physics_process(_delta: float) -> void:
 	elif spriteIndex >= 1 and spriteIndex < 4:	head_graphic.frame = 2
 
 	if hands.global_position.distance_squared_to(get_global_mouse_position()) <= atk_range * atk_range:
+		beam_effect.global_position = get_global_mouse_position()
+		_atk_indicator.global_position = get_global_mouse_position()
 		_atk_area.global_position = get_global_mouse_position()
 		_atk_line.points = [_tool_graphic.position, lerp(_atk_line.position, _atk_area.position + Vector2(rand_range(-25,25),rand_range(-25,25)), rand_range(0.25,0.75)), _atk_area.position]
 #		beam_effect.global_position = get_global_mouse_position()
 	else:
+		beam_effect.position = _atk_line.points[-1]
+		_atk_indicator.position = _atk_line.points[-1]
 		_atk_area.position = _atk_cast.cast_to
 		_atk_line.points = [_tool_graphic.position, lerp(_atk_line.position, _atk_cast.cast_to + Vector2(rand_range(-25,25),rand_range(-25,25)), rand_range(0.25,0.75)), _atk_cast.cast_to]
 #		beam_effect.position = _atk_cast.cast_to
@@ -184,10 +188,22 @@ func _hit_block(tilemap : TileMap = null, col_point : Vector2 = Vector2()) -> vo
 		elif cell_name.begins_with("stone") and cell_name.ends_with("_6"): # last block stage so delete
 			tilemap.set_cell(int(tile.x),int(tile.y),-1) # -1 is nothing
 			_spawn_loot(tilemap, tile.x, tile.y, "stone")
+		elif cell_name.begins_with("basalt") and cell_name.ends_with("_8"): # last block stage so delete
+			tilemap.set_cell(int(tile.x),int(tile.y),-1) # -1 is nothing
+			_spawn_loot(tilemap, tile.x, tile.y, "basalt")
 		elif cell_name.begins_with("milkore") and cell_name.ends_with("_7"): # last block stage so delete
 			tilemap.set_cell(int(tile.x),int(tile.y),-1) # -1 is nothing
 			_spawn_loot(tilemap, tile.x, tile.y, "milkore")
-		else:
+		elif cell_name.begins_with("shinyore") and cell_name.ends_with("_7"): # last block stage so delete
+			tilemap.set_cell(int(tile.x),int(tile.y),-1) # -1 is nothing
+			_spawn_loot(tilemap, tile.x, tile.y, "shinyore")
+		elif cell_name.begins_with("magmaore") and cell_name.ends_with("_15"): # last block stage so delete
+			tilemap.set_cell(int(tile.x),int(tile.y),-1) # -1 is nothing
+			_spawn_loot(tilemap, tile.x, tile.y, "magmaore")
+		elif cell_name.begins_with("steel block") and cell_name.ends_with("_5"):
+			tilemap.set_cell(int(tile.x),int(tile.y),-1) # -1 is nothing
+			_spawn_loot(tilemap, tile.x, tile.y, "steel_block")
+		elif !cell_name.begins_with("bedrock"):
 			tilemap.set_cell(int(tile.x),int(tile.y) ,id+1)
 #	else:
 #		tilemap.set_cell(int(tile.x),int(tile.y),0) # This is testing only!
@@ -199,26 +215,32 @@ func _spawn_loot(tilemap : TileMap, tile_x : int, tile_y : int, item : String = 
 	var pos : Vector2 = tilemap.map_to_world(Vector2(tile_x, tile_y))
 	pos = tilemap.to_global(pos)
 	drop_loot_inst.global_position = pos
-	if item == "" or item == "dirt":
-		drop_loot_inst.item_name = "Dirt"
-	elif item == "dark_dirt":
-		drop_loot_inst.item_name = "Dark Dirt"
-	elif item == "stone":
-		drop_loot_inst.item_name = "Stone"
-	elif item == "milkore":
-		drop_loot_inst.item_name = "Milkore"
+	if item == "" or item == "dirt":	drop_loot_inst.item_name = "Dirt"
+	elif item == "dark_dirt":	drop_loot_inst.item_name = "Dark Dirt"
+	elif item == "stone":	drop_loot_inst.item_name = "Stone"
+	elif item == "basalt":	drop_loot_inst.item_name = "Basalt"
+	elif item == "milkore":	drop_loot_inst.item_name = "Milkore"
+	elif item == "shinyore":	drop_loot_inst.item_name = "Shinyore"
+	elif item == "magmaore":	drop_loot_inst.item_name = "Magmaore"
+	elif item == "steel_block":	drop_loot_inst.item_name = "Steel Block"
 #	drop_loot_inst.get_node("Graphic").texture.set("region", Rect2(64,0,32,32))
 	
 	get_tree().root.get_node("GameWorld").add_child(drop_loot_inst)
 	return
 
-func _melee_attack(target : Node, dmg : int = 0) -> void:
+func _melee_attack(target : Node, dmg : int = 0, shield_only : bool = false) -> void:
 	var bodies = atk_area.get_overlapping_bodies()
+	var areas = atk_area.get_overlapping_areas()
 	for i in bodies:
 		if i == target:
 			target._take_damage(dmg)
+	for i in areas:
+		if i == target:
+			target.get_parent()._take_damage(dmg, shield_only)
 	return
 
+onready var scatter_gun_sfx = $ScatterGunSFX
+onready var smg_sfx = $SMGSFX
 const ENERGY_PULSE = preload("res://Scenes/EnergyPulse.tscn")
 var spread : float = 5.0;	var current_spread : float
 func _ranged_attack() -> void:
@@ -238,6 +260,11 @@ func _ranged_attack() -> void:
 		energy_pulse_inst.global_position = _tool_graphic.global_position
 		energy_pulse_inst.current_dmg = damage
 		get_tree().root.get_node("GameWorld").add_child(energy_pulse_inst)
+	
+	if hotbar_item.item_name == "Energy Scatter Gun":
+		scatter_gun_sfx.play()
+	if hotbar_item.item_name == "Energy Sub-machine Gun":
+		smg_sfx.play()
 	return
 
 func _on_SwingTimer_timeout() -> void:
@@ -254,13 +281,20 @@ func _on_SwingTimer_timeout() -> void:
 #		return
 	
 	var bodies = atk_area.get_overlapping_bodies()
+	var areas = atk_area.get_overlapping_areas()
 	for i in bodies:
 		if hotbar_item.category == "Tool":
 			if i is TileMap:	_hit_block(i, atk_area.global_position)
 			if i.is_in_group("Entities"):	_melee_attack(i, damage)
 		elif hotbar_item.category == "Block":
-			print_debug(block_name)
+#			print_debug(block_name)
 			_place_block(i, atk_area.global_position, block_name)
+	for i in areas:
+		if hotbar_item.category == "Tool":
+			if i.is_in_group("Mechs") or i.is_in_group("Missiles"):
+				_melee_attack(i, damage)
+			elif i.is_in_group("Blockers"):
+				_melee_attack(i, damage, true)
 
 func _on_AtkDelayTimer_timeout() -> void:
 	can_fire = true
